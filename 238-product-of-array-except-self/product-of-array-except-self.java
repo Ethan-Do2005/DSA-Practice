@@ -1,39 +1,39 @@
 class Solution {
     public int[] productExceptSelf(int[] nums) {
-        int n = nums.length;
-        int[] prefix = new int[n];
-        int[] suffix = new int[n];
+        int[] prefix = new int[nums.length];
+        int[] suffix = new int[nums.length];
 
-        int product = 1;
         prefix[0] = 1;
-        suffix[n-1] = 1;
+        for(int i = 1; i < nums.length;i++){
+            prefix[i]= nums[i-1] * prefix[i-1];
+            System.out.print(prefix[i]);
+        }
+        System.out.println("next");
 
-        for(int i = 1; i < n; i++){
-            prefix[i] = prefix[i-1] * nums[i-1];
+        suffix[nums.length-1] = 1;
+        for(int i = nums.length-2; i >=0;i--){
+            suffix[i]= nums[i+1] * suffix[i+1];
+            System.out.print(suffix[i]);
         }
 
-        for(int i = n-2; i >= 0; i--){
-            suffix[i] = suffix[i+1] * nums[i+1];
+        int[] result = new int[nums.length];
+        for(int i = 0; i < nums.length; i++){
+            result[i] = prefix[i] * suffix[i];
         }
 
-        int[] answer = new int[n];
-        for(int i = 0; i < n; i++){
-            answer[i] = prefix[i] * suffix[i];
-        }
-
-        return answer;
+        return result;
     }
 }
 /*
-We will use the prefix and suffix currently 
+[1,1,2,6]
+[24,12,4,1]
 
-nums = [1,2,3,4]
+[0,0,0,1]
+suffix[3] = 1
+ i = 4-2 = 2
+ suffix[2] = nums[3] * prefix
 
-prefix = [1,1,2,6]
 
-suffix = [24,12,4,1]
-
-
-Output [24,12,8,6]
-
+[1,1,2,6]
+[24,12,4,1]
 */
