@@ -15,22 +15,20 @@
  */
 class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
-        List<List<Integer>> list = new ArrayList<>();
-        dfs(root, 0, list);
-        return list;
+        List<List<Integer>> result = new ArrayList<>();
+        AddingNode(root, 0, result);
+        return result;
     }
 
-    private void dfs(TreeNode node, int depthTree, List<List<Integer>> list){
-        if(node == null){
-            return;
-        }
-        if(list.size() == depthTree){
-            //create another list inside list
+    private void AddingNode(TreeNode node, int depthTree, List<List<Integer>> list){
+        if(node == null) return;
+
+        if(depthTree == list.size()){
             list.add(new ArrayList<>());
         }
         list.get(depthTree).add(node.val);
-        dfs(node.left, depthTree + 1, list);
-        dfs(node.right, depthTree + 1, list);
 
+        AddingNode(node.left, depthTree + 1, list);
+        AddingNode(node.right, depthTree + 1, list);
     }
 }
