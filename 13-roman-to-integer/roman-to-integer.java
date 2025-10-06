@@ -1,27 +1,43 @@
 class Solution {
     public int romanToInt(String s) {
-        Map<Character, Integer> romanNum = new HashMap<>();
+        Map<Character, Integer> map = new HashMap<>();
 
-        romanNum.put('I', 1);
-        romanNum.put('V', 5);
-        romanNum.put('X', 10);
-        romanNum.put('L', 50);
-        romanNum.put('C', 100);
-        romanNum.put('D', 500);
-        romanNum.put('M', 1000);
+        map.put('I', 1);
+        map.put('V', 5);
+        map.put('X', 10);
+        map.put('L', 50);
+        map.put('C', 100);
+        map.put('D', 500);
+        map.put('M', 1000);
 
-        int total = 0;
-        for(int i = 0; i < s.length(); i++){
-            int currentVal = romanNum.get(s.charAt(i));
-
-            if(i + 1 < s.length() && currentVal < romanNum.get(s.charAt(i+1))){
-                total -= currentVal;
+        int sum = 0;
+        for(int i =0; i < s.length(); i++){
+            int curr = map.get(s.charAt(i));
+            int next;
+            if(i + 1 < s.length()){
+                next = map.get(s.charAt(i+1));
+            }else{
+                next = 0;
             }
-            else{
-                total += currentVal;
+
+            if(curr < next){
+                sum -= curr;
+            }else{
+                sum += curr;
             }
         }
 
-        return total;
+
+        return sum;
     }
 }
+/*
+My idea
+Using hashset
+For each character in the string
+    if satisfy condition (in the symbol and i > i+1)
+        convert into that number
+    else if i < i+1
+        take i+1 - i
+    else
+*/
