@@ -11,3 +11,7 @@ class Solution {
         return set.size();
     }
 }
+/*
+Time complexity: O(n)
+Space complexity: O(number > 0) or means O
+*/
