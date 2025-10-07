@@ -17,7 +17,7 @@ class Solution {
     public Node copyRandomList(Node head) {
         if(head == null) return null;
 
-        // Step 1: Create Node's copy
+        //Step 1:
         Node curr = head;
         while(curr != null){
             Node copy = new Node(curr.val);
@@ -25,41 +25,37 @@ class Solution {
             curr.next = copy;
             curr = copy.next;
         }
-        // A -> A' -> B -> B' -> C -> C'
 
-        // Step 2: Pointer fake randon node
-        // Want to make for ex: A' -> C'
+        //Step 2:
         curr = head;
         while(curr != null){
             if(curr.random != null){
-                curr.next.random = curr.random.next; // A' -> C-
-                //curr.next.random: the copy of node random (pointer of A' - pointer A.random)
-                // curr.random.next: the random of original node 
+                curr.next.random = curr.random.next;
             }
             curr = curr.next.next;
         }
 
-        Node dummy = new Node(0);
-        Node node = dummy; 
+        //Step 3
         curr = head;
+        Node dummy = new Node(0);
+        Node node = dummy;
+
         while(curr != null){
             Node copy = curr.next;
             Node nextOri = copy.next;
 
             node.next = copy;
             node = copy;
-
+            
             curr.next = nextOri;
-            curr= nextOri;
+            curr = nextOri;
         }
 
-        return dummy.next;
+        return dummy.next;  
     }
 }
 /*
-My idea:
-3 Total Steps:
-Step 1: Create Fake Node with Node'
-Step 2: Node'.random = Node1' 
-Step 3: new List Node (just get fake node)
+Step 1: fake node
+Step 2: trace random node pointer
+Step 3: return into new Node
 */
