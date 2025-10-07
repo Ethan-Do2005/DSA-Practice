@@ -56,3 +56,10 @@ class Solution {
         return dummy.next;
     }
 }
+/*
+My idea:
+3 Total Steps:
+Step 1: Create Fake Node with Node'
+Step 2: Node'.random = Node1' 
+Step 3: new List Node (just get fake node)
+*/
