@@ -24,3 +24,11 @@ class Solution {
         return res;
     }
 }
+/*
+Go through from 
++ top left to top right (move col) end with top++
++ right top to right bot (down row) end with right--
++ right bot to left bot (move col) end with bot--
++ left bot to left top (move top) end with left++
+
+*/
