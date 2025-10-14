@@ -1,32 +1,32 @@
 class RandomizedSet {
-    private final Map<Integer, Integer> map = new HashMap<>();
-    private final List<Integer> list = new ArrayList<>();
-    private final Random random = new Random();
+    private Map<Integer, Integer> map = new HashMap<>();
+    private List<Integer> list = new ArrayList<>();
+    Random random = new Random();
 
     public RandomizedSet() {
-        //Nothing to do
+    //Nothing     
     }
     
     public boolean insert(int val) {
-        if(list.contains(val)){
-            return false;
-        }
+        if(map.containsKey(val)) return false;
+
         map.put(val, list.size());
         list.add(val);
-        return true;
+        return true;    
     }
     
     public boolean remove(int val) {
-        Integer valIdx = map.get(val);
-        if(valIdx == null) return false;
+        Integer n = map.get(val);
 
-        int lastIdx = list.size() - 1;
-        int lastVal = list.get(lastIdx);
+        if(n == null) return false;
 
-        list.set(valIdx, lastVal);
-        list.remove(lastIdx);
+        int lastIndex = list.size() -1;
+        int lastValue = list.get(lastIndex);
 
-        map.put(lastVal, valIdx);
+        list.set(n, lastValue);
+        list.remove(lastIndex);
+
+        map.put(lastValue, n);
         map.remove(val);
         return true;
     }
