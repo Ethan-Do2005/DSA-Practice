@@ -1,25 +1,23 @@
 class Solution {
-
-    int total;
     int[] prefix;
-
+    int total;
     public Solution(int[] w) {
-        int n = w.length;
-        prefix = new int[n];
+        prefix = new int[w.length];
+        total = 0;
+
         prefix[0] = w[0];
 
-        for(int i = 1; i < n ; i++){
-            prefix[i] = prefix[i-1] + w[i];
+        for(int i = 1; i < w.length; i++){
+            prefix[i] = w[i] + prefix[i-1];
         }
 
-        total = prefix[n-1];
+        total = prefix[prefix.length - 1];
     }
-
     
     public int pickIndex() {
         int target = 1 + (int)(Math.random() * total);
         int l = 0;
-        int r = prefix.length - 1;
+        int r = prefix.length -1;
 
         while(l < r){
             int m = l + (r-l)/2;
@@ -31,7 +29,6 @@ class Solution {
             }
         }
 
-
         return l;
     }
 }
@@ -40,9 +37,4 @@ class Solution {
  * Your Solution object will be instantiated and called as such:
  * Solution obj = new Solution(w);
  * int param_1 = obj.pickIndex();
- */
-
- /*
-Step 1: Prefix
-Step 2: Binary Seach
  */
