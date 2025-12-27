@@ -1,26 +1,25 @@
 class Solution {
     public int[][] merge(int[][] intervals) {
+        List<int[]> result = new ArrayList<>();
+
         Arrays.sort(intervals, (a,b) -> Integer.compare(a[0], b[0]));
-        List<int[]> res = new ArrayList<>();
-        res.add(intervals[0]);
+        
+        int[] currInterval = intervals[0];
+        result.add(currInterval);
 
-        for(int[] interval : intervals){
-            int start = interval[0];
-            int end = interval[1];
-            int prevEnd = res.get(res.size() - 1)[1];
+        for(int[] nextInterval : intervals){
+            int currentEnd = currInterval[1];
+            int nextStart = nextInterval[0];
+            int nextEnd = nextInterval[1];
 
-            if(start <= prevEnd){
-                res.get(res.size() - 1)[1] = Math.max(end, prevEnd);
+            if(nextStart <= currentEnd ){
+                currInterval[1] = Math.max(currentEnd, nextEnd);
             }else{
-                res.add(new int[]{start,end});
+                currInterval = nextInterval;
+                result.add(currInterval);
             }
         }
 
-        return res.toArray(new int[res.size()][]);
+        return result.toArray(new int[result.size()][]);
     }
 }
-/*
-Step 1: Call List int[]
-Step 2: Calling for loop to compare each intervals
-Step 3: return
-*/
