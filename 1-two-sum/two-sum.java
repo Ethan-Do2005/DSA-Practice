@@ -1,27 +1,25 @@
-class Solution{
-    public int[] twoSum(int[] nums, int target){
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
         Map<Integer, Integer> map = new HashMap<>();
 
         for(int i = 0; i < nums.length; i++){
-            int isTarget = target - nums[i];
-            if(map.containsKey(isTarget)){
-                return new int[]{map.get(isTarget), i};
+            int numFound = target - nums[i];
+
+            if(map.containsKey(numFound)){
+                return new int[]{map.get(numFound), i};
             }
-            map.put(nums[i],i);
+            map.put(nums[i], i);
         }
 
         return new int[]{};
     }
 }
 /*
-Using HashMap to store 
-Take target - nums[i] compare HashMap
-
-HashSet set
-
-for(i in nums)
-    int Istarget = target - nums[i]
-    If condition Istarget contains in set
-        return indeces
-    add that pair into set
+[2,7,11,15]
+First index: 2
+9 - 2 = 7
+Push 2 (i index) into map
+Second index:
+if it satisfy 
+=> i, get() 
 */
