@@ -1,22 +1,21 @@
 class LRUCache {
-    //Step 1: Node Structure
+    //Step 1: Node structure
     class Node{
-        int key;
-        int value;
+        int value, key;
 
         Node prev;
         Node next;
-        Node(int k, int v){
-            key = k;
-            value = v;
+
+        Node(int key, int value){
+            this.key = key;
+            this.value = value;
         }
     }
 
-    //Step 3: variable outside
-    private final int capacity;
     private Map<Integer, Node> map = new HashMap<>();
-    private final Node head = new Node(-1,-1);
-    private final Node tail = new Node(-1,-1);
+    private int capacity;
+    private Node head = new Node(0,0);
+    private Node tail = new Node(0,0);
 
     public LRUCache(int capacity) {
         this.capacity = capacity;
@@ -25,66 +24,59 @@ class LRUCache {
     }
     
     public int get(int key) {
-        Node n = map.get(key);
+        if(!(map.containsKey(key))){
+            return -1;
+        }
 
-        if(n == null) return -1;
-        moveToHead(n);
-        return n.value;
+        Node node = map.get(key);
+        remove(node);
+        addToFront(node);
+
+        return node.value;
     }
     
     public void put(int key, int value) {
-        Node n = map.get(key);
-
-        //Exists key
-        if(n != null){
-            n.value = value;
-            moveToHead(n);
+        
+        //If key exits and just update the value
+        if(map.containsKey(key)){
+            Node node = map.get(key);
+            node.value = value;
+            remove(node);
+            addToFront(node);
             return;
         }
 
-        // Not exists
-        Node node = new Node(key, value);
-        map.put(key, node);
-        addToHead(node);
+        Node newNode = new Node(key,value);
+        map.put(key, newNode);
+        addToFront(newNode);
 
-        //Check size
         if(map.size() > capacity){
-            Node lru = removeTail();
+            Node lru = tail.prev;   // Least recently used
+            remove(lru);
             map.remove(lru.key);
         }
     }
 
-    //Step 2: Helper method
-    private void addToHead(Node n){
-        n.prev = head;
-        n.next = head.next;
-        head.next.prev = n;
-        head.next = n;
+    //Helper method for DLL
+    private void remove(Node node){
+        node.prev.next = node.next;
+        node.next.prev = node.prev;
     }
 
-    private void removeNode(Node n){
-        n.prev.next = n.next;
-        n.next.prev = n.prev;
-    }
-
-    private void moveToHead(Node n){
-        removeNode(n);
-        addToHead(n);
-    }
-
-    private Node removeTail(){
-        Node lru = tail.prev;
-        removeNode(lru);
-        return lru;
+    private void addToFront(Node node){
+        node.next = head.next;
+        node.prev = head;
+        head.next.prev = node;
+        head.next = node;
     }
 }
 /*
-5 Steps:
-Step 1: Node Structure
-Step 2: Helper method 
-Step 3: 
+Using HashMap + Doubly Linked List 
+HashMap for O(1) in Get and Put
+DLL for O(1) Find least used and Track Usage Order
+4 steps total:
+Step 1: Node structure  
 */
-
 /**
  * Your LRUCache object will be instantiated and called as such:
  * LRUCache obj = new LRUCache(capacity);
