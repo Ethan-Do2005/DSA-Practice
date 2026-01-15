@@ -17,6 +17,8 @@ class Solution {
     }
 }
 /*
+
+O(n) time complexity and O(1) space complexity
 [7,1,5,3,6,4]
 0 <= 6
 
