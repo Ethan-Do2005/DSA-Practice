@@ -16,17 +16,13 @@ class Solution {
             }
         }
 
-        return (stack.isEmpty());
+        return stack.isEmpty();
     }
 }
 /*
-Stack: LIFO
-()[]{}
-[     ]
+[      }              ]
+if having opening brakce
+=> push closing bracket in stack
 
-if condition => opening bracket
-push(closing bracket with same type) in stack
-
-else if(stack.isEmpty() || pop != char)
-    false
+Otherwise (Checking stakci empty and stack.pop() with current char)
 */
