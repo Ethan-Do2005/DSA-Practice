@@ -13,14 +13,13 @@ class Solution {
             return root;
         }
 
-        TreeNode left = lowestCommonAncestor(root.left, p, q);
-        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        TreeNode leftSide = lowestCommonAncestor(root.left, p, q);
+        TreeNode rightSide = lowestCommonAncestor(root.right, p, q);
 
-        //Case 1: both are not one the same side and not null
-        if(left != null && right != null){
-            return root;
+        if(leftSide != null && rightSide != null){
+            return root; 
         }
 
-        return (left != null) ? left : right;
+        return (leftSide != null) ? leftSide : rightSide;
     }
 }
