@@ -1,6 +1,6 @@
 class Solution {
     public String reformatDate(String date) {
-        Map<String, String> monthConvert = Map.ofEntries(
+        Map<String, String> monthData = Map.ofEntries(
             Map.entry("Jan", "01"), Map.entry("Feb", "02"),
             Map.entry("Mar", "03"), Map.entry("Apr", "04"),
             Map.entry("May", "05"), Map.entry("Jun", "06"),
@@ -16,7 +16,7 @@ class Solution {
             day = "0" + day;
         }
 
-        String month = monthConvert.get(parts[1]);
+        String month = monthData.get(parts[1]);
 
         String year = parts[2];
 
