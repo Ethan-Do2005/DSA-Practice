@@ -16,25 +16,41 @@ class Solution {
             if(freqA != freqB){
                 return freqA - freqB;
             }else{
-                return b-a;
+                return b - a;
             }
         });
 
+        int[] result = new int[nums.length];
         for(int i = 0; i < nums.length; i++){
-            nums[i] = list.get(i);
-        } 
+            result[i] = list.get(i);
+        }
 
-        return nums; 
+        return result;
     }
 }
 /*
-Negative number 
-Yes
-range length of nums 
-1 to 100
+what is the range length of nums
+from 1 to 100
 
-My approach
-A: HashMap + List
-{1:2, 2:3, 3:1}
-{1,1,2,2,2,3}
+My approach for this using HashMap and List
+HashMap: count the freq num in nums
+List: sorted order
+
+nums = [1,1,2,2,2,3]
+HashMap{1:2, 2:3, 3:1}
+
+List {1,1,2,2,2,3}
+Collections.sort
+Same frequency of two index
+    => Compare by list value
+1 (freq 2)
+1 1 => 0 => it will order two
+1 2 => 3 - 2 => it still same 
+2 2 => 
+2 2 
+2 3 => 3 2
+list {1,1,2,2,3,2}
+2, 3 => 3 2 
+list {1,1,2,3,2,2}
+list {3,1,1,2,2,2}
 */
