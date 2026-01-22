@@ -1,13 +1,10 @@
 class Solution {
     public String reformatDate(String date) {
-        Map<String, String> monthData = Map.ofEntries(
-            Map.entry("Jan", "01"), Map.entry("Feb", "02"),
-            Map.entry("Mar", "03"), Map.entry("Apr", "04"),
-            Map.entry("May", "05"), Map.entry("Jun", "06"),
-            Map.entry("Jul", "07"), Map.entry("Aug", "08"),
-            Map.entry("Sep", "09"), Map.entry("Oct", "10"),
-            Map.entry("Nov", "11"), Map.entry("Dec", "12")
-        );
+        Map<String, String> months = new HashMap<>();
+        months.put("Jan", "01"); months.put("Feb", "02"); months.put("Mar", "03");
+        months.put("Apr", "04"); months.put("May", "05"); months.put("Jun", "06");
+        months.put("Jul", "07"); months.put("Aug", "08"); months.put("Sep", "09");
+        months.put("Oct", "10"); months.put("Nov", "11"); months.put("Dec", "12");
 
         String[] parts = date.split(" ");
 
@@ -16,7 +13,7 @@ class Solution {
             day = "0" + day;
         }
 
-        String month = monthData.get(parts[1]);
+        String month = months.get(parts[1]);
 
         String year = parts[2];
 
