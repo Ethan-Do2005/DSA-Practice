@@ -1,15 +1,11 @@
 class Solution {
     public int[] frequencySort(int[] nums) {
-        
-        //Step 1: Map storage
-        Map<Integer, Integer> map = new HashMap<>();
-        for(int num: nums){
-            map.put(num, map.getOrDefault(num, 0)+1);
-        }
 
-        //Step 2: List storage
+        Map<Integer, Integer> map = new HashMap<>();
         List<Integer> list = new ArrayList<>();
+
         for(int num : nums){
+            map.put(num, map.getOrDefault(num, 0) + 1);
             list.add(num);
         }
 
@@ -24,10 +20,21 @@ class Solution {
             }
         });
 
-        for(int i = 0; i < nums.length;i++){
+        for(int i = 0; i < nums.length; i++){
             nums[i] = list.get(i);
-        }
+        } 
 
-        return nums;
+        return nums; 
     }
 }
+/*
+Negative number 
+Yes
+range length of nums 
+1 to 100
+
+My approach
+A: HashMap + List
+{1:2, 2:3, 3:1}
+{1,1,2,2,2,3}
+*/
