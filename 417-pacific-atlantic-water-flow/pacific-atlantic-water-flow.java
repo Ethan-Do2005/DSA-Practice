@@ -1,32 +1,32 @@
 class Solution {
-    private int[][] directions = {{-1,0},{1,0},{0,1},{0,-1}};
-    private int rows,cols;
+    List<List<Integer>> result;
+    int[][] directions = {{1,0}, {-1,0}, {0,1}, {0,-1}};
+    int rows, cols;
 
     public List<List<Integer>> pacificAtlantic(int[][] heights) {
-        List<List<Integer>> result = new ArrayList<>();
-
+        result = new ArrayList<>();
         rows = heights.length;
         cols = heights[0].length;
 
-        boolean[][] pacific = new boolean[rows][cols];
-        boolean[][] atlantic = new boolean[rows][cols];
+        boolean[][] checkPacific = new boolean[rows][cols];
+        boolean[][] checkAtlantic = new boolean[rows][cols];
 
         //Left and Right Side
-        for(int i = 0; i < rows; i++){
-            dfs(heights, i, 0, pacific, Integer.MIN_VALUE); //Pacific Left Side
-            dfs(heights, i, cols-1, atlantic, Integer.MIN_VALUE); //Atlantic Right Side
-        }
-
-        //Top and Down Side
-        for(int i = 0; i < cols; i++){
-            dfs(heights, 0, i, pacific, Integer.MIN_VALUE ); //Pacific Up Side
-            dfs(heights, rows - 1, i, atlantic, Integer.MIN_VALUE); //Atlantic Down Side
-        }
-
         for(int r = 0; r < rows; r++){
-            for(int c = 0; c < cols; c++){
-                if(pacific[r][c] && atlantic[r][c]){
-                    result.add(Arrays.asList(r,c));
+            dfs(heights, r, 0, checkPacific, 0); // Pacific check
+            dfs(heights, r, cols - 1, checkAtlantic, 0); // Atlantic check
+        }
+
+        //Top and Bot
+        for(int c = 0; c < cols; c++){
+            dfs(heights, 0, c, checkPacific, 0);
+            dfs(heights, rows - 1, c, checkAtlantic, 0);
+        }
+
+        for(int row = 0; row < rows; row++){
+            for(int col = 0; col < cols; col++){
+                if(checkPacific[row][col] && checkAtlantic[row][col]){
+                    result.add(Arrays.asList(row, col));
                 }
             }
         }
@@ -34,33 +34,18 @@ class Solution {
         return result;
     }
 
-    private void dfs(int[][] heights, int row, int col, boolean[][] visited, int prevHeight){
-        if(row < 0 || row >= rows || col < 0 || col >= cols){
+    private void dfs(int[][] heights, int r, int c, boolean[][] visited, int prevHeight){
+        if(r < 0 || r >= rows || c < 0 || c >= cols){
             return;
         }
 
-        if(visited[row][col] || heights[row][col] < prevHeight){
+        if(visited[r][c] || heights[r][c] < prevHeight){
             return;
         }
 
-        visited[row][col] = true;
-
+        visited[r][c] = true;
         for(int[] dir : directions){
-            dfs(heights, row + dir[0], col + dir[1], visited, heights[row][col]);
+            dfs(heights, r + dir[0], c + dir[1], visited, heights[r][c]);
         }
-
-
     }
 }
-/*
-what is the range length ?
-row >= 1 
-col <= 200
-
-For one cell is heights(2,2) value 5 
-go from pacific ocean
-example from (2,0) -> (2,1) -> (2,2) and mark (2,2) as true
-
-Time and Space complexity: O(nlogn)
-
-*/
