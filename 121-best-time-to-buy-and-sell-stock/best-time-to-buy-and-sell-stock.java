@@ -4,12 +4,12 @@ class Solution {
         int buy = 0;
         int maxProfit = 0;
 
-        while(sell < prices.length-1){
+        while(sell < prices.length){
             if(prices[buy] > prices[sell]){
                 buy = sell;
             }
-            sell++;
             maxProfit = Math.max(maxProfit, prices[sell] - prices[buy]);
+            sell++;
         }
 
         return maxProfit;
