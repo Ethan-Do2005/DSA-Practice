@@ -1,6 +1,6 @@
 class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
-        Map<String, List<String>> result = new HashMap<>();
+        Map<String, List<String>> map = new HashMap<>();
 
         for(String str : strs){
             int[] count = new int[26];
@@ -9,26 +9,14 @@ class Solution {
             }
 
             String key = Arrays.toString(count);
-            result.putIfAbsent(key, new ArrayList<>());
-            result.get(key).add(str);
+            map.putIfAbsent(key, new ArrayList<>());
+            map.get(key).add(str);
         }
 
-        return new ArrayList<>(result.values());
+        return new ArrayList<>(map.values());
     }
 }
 /*
-Range length
-1 --> 10^5
-Those will be upper or lowercase 
-=> lowercase
-
-Approach A
-
-Using HashMap
-ace cea
-Method
-[26]
-
-[1,0,1,0,1,0,0,0,]
-
+Time O(N *m) where n is strs.length and m is max of each str
+Space O(n * m) where n is strs.length and m is max of each str
 */
