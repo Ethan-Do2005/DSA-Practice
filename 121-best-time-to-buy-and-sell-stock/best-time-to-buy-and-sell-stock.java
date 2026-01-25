@@ -16,6 +16,8 @@ class Solution {
     }
 }
 /*
+Time O(n);
+Space O(1)
 Using two pointer
 sell > buy => buy index is always small or equal to sell
 */
