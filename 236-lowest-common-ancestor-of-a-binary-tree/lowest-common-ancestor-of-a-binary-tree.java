@@ -23,3 +23,7 @@ class Solution {
         return (leftSide != null) ? leftSide : rightSide;
     }
 }
+/*
+Time and Space 
+O(n) and O(h) 
+*/
