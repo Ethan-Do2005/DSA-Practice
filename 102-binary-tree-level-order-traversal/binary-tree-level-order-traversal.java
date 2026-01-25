@@ -16,19 +16,22 @@
 class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> result = new ArrayList<>();
-        AddingNode(root, 0, result);
+
+        backtrack(0, root, result);
         return result;
     }
 
-    private void AddingNode(TreeNode node, int depthTree, List<List<Integer>> list){
-        if(node == null) return;
-
-        if(depthTree == list.size()){
-            list.add(new ArrayList<>());
+    private void backtrack(int depth, TreeNode node, List<List<Integer>> result){
+        if(node == null){
+            return;
         }
-        list.get(depthTree).add(node.val);
 
-        AddingNode(node.left, depthTree + 1, list);
-        AddingNode(node.right, depthTree + 1, list);
+        if(depth == result.size()){
+            result.add(new ArrayList<>());
+        }
+        result.get(depth).add(node.val);
+
+        backtrack(depth + 1, node.left, result);
+        backtrack(depth + 1, node.right, result);
     }
 }
