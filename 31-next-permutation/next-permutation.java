@@ -40,4 +40,6 @@ class Solution {
 is 4
 + Swap 4 with 5 
 + Swap descending part to ascending part 
+
+Time and Space O(n) O(1)
 */
