@@ -3,28 +3,28 @@ class Solution {
         Arrays.sort(intervals, (a,b) -> Integer.compare(a[0],b[0]));
 
         List<int[]> list = new ArrayList<>();
-        
-        int[] currInterval = intervals[0];
-        list.add(currInterval);
 
-        for(int[] nextInterval : intervals){
-            int nextStart = nextInterval[0];
-            int nextEnd = nextInterval[1];
+        int[] intervalCurr = intervals[0];
+        list.add(intervalCurr);
 
-            if(nextStart <= currInterval[1]){
-                currInterval[1] =  Math.max(nextEnd, currInterval[1]);
+        for(int[] intervalNext : intervals){
+            int startNext = intervalNext[0];
+            int endNext = intervalNext[1];
+
+            if(startNext <= intervalCurr[1]){
+                intervalCurr[1] = Math.max(intervalCurr[1], endNext);
             }else{
-                currInterval = nextInterval;
-                list.add(currInterval);
+                intervalCurr = intervalNext;
+                list.add(intervalCurr);
             }
         }
 
-        return list.toArray(new int[list.size()][]);
+        int[][] result = new int[list.size()][2];
+
+        for(int i = 0; i < list.size(); i++){
+            result[i] = list.get(i);
+        }
+
+        return result;
     }
 }
-/*
-1--->3
-   2---->6
-              8--->10
-                       15--->18
-*/
