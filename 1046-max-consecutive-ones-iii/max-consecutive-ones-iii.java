@@ -24,5 +24,5 @@ class Solution {
     }
 }
 /*
-
+Time O(n) Spaoce (1)
 */
