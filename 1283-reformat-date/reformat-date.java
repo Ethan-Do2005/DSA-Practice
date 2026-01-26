@@ -9,12 +9,12 @@ class Solution {
         String[] parts = date.split(" ");
 
         String day = parts[0].substring(0, parts[0].length() - 2);
-        if(day.length() == 1){
+        if(day.length() < 2){
             day = "0" + day;
         }
 
         String month = months.get(parts[1]);
-
+        
         String year = parts[2];
 
         return year + "-" + month + "-" + day;
